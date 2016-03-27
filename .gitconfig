@@ -1,21 +1,22 @@
 [color]
-  ui = auto
+    ui = auto
 [user]
-  name = Anh Tranngoc
-  email = manhhomienbienthuy@yahoo.com.vn
+    name = Anh Tranngoc
+    email = manhhomienbienthuy@yahoo.com.vn
 [push]
-  default = matching
+    default = matching
 [core]
-  editor = vim
+    editor = vim
 [alias]
-  new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
-  changes = diff --name-status -r
-  diffstat = diff --stat -r
-  gitkconflict = !gitk --left-right HEAD...MERGE_HEAD
-  update = !sh -c 'git commit -a --amend --no-edit && git push origin $1 -f' -
-  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  d = difftool
-  lsu = ls-files -o --exclude-standard --full-name # list untracked files
-  lsm = ls-files -m --exclude-standard --full-name # list modified files.
-  ls = ls-files -mo --exclude-standard --full-name # list files changed and untracked files
-  addall = ! git add $(git ls)
+    new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+    changes = diff --name-status -r
+    diffstat = diff --stat -r
+    gitkconflict = !gitk --left-right HEAD...MERGE_HEAD
+    update = !sh -c 'git commit -a --amend --no-edit && git push origin $1 -f' -
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    d = difftool
+    lsu = ls-files -o --exclude-standard --full-name # list untracked files
+    lsm = ls-files -m --exclude-standard --full-name # list modified files.
+    ls = ls-files -mo --exclude-standard --full-name # list files changed and untracked files
+    addall = ! git add $(git ls)
+    up = !sh -c 'git pull upstream $(git symbolic-ref --short HEAD) && git push origin'

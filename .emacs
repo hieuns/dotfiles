@@ -6,33 +6,55 @@
 (require 'package)
 
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+      '("melpa" . "http://melpa.org/packages/") t)
 
 (package-initialize)
 (when (not package-archive-contents)
-  (package-refresh-contents))
+ (package-refresh-contents))
 
 (defvar myPackages
-  '(better-defaults
-    ein
-    elpy
-    flycheck
-    material-theme
-    py-autopep8
-    markdown-mode
-    neotree))
+ '(better-defaults
+   ein
+   elpy
+   flycheck
+   material-theme
+   py-autopep8
+   markdown-mode))
 
 (mapc #'(lambda (package)
-          (unless (package-installed-p package)
-            (package-install package)))
-      myPackages)
+   (unless (package-installed-p package)
+     (package-install package)))
+     myPackages)
 
 ;; BASIC CUSTOMIZATION
 ;; --------------------------------------
 
-(setq inhibit-startup-message t) ;; hide the startup message
 (load-theme 'material t) ;; load material theme
-(global-linum-mode t) ;; enable line numbers globally
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(elpy-modules
+   (quote
+    (elpy-module-company
+     elpy-module-eldoc
+     elpy-module-pyvenv
+     elpy-module-yasnippet
+     elpy-module-django
+     elpy-module-sane-defaults)))
+ '(global-linum-mode t)
+ '(inhibit-startup-screen t)
+ '(show-paren-mode t)
+ '(tool-bar-mode nil)
+ '(column-number-mode t))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 ;; PYTHON CONFIGURATION
 ;; --------------------------------------
@@ -44,23 +66,19 @@
 
 ;; use flycheck not flymake with elpy
 (when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
+ (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+ (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 ;; enable autopep8 formatting on save
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
-;; MARKDOWN CONFIGURATIOn
+;; MARKDOWN CONFIGURATION
 ;; --------------------------------------
 
-(require 'markdown-mode)
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown file" t)
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
-;; NEOTREE CONFIGURATION
-;; --------------------------------------
-
-(require 'neotree)
 
 ;; init.el ends here
